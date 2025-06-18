@@ -40,6 +40,138 @@
             box-sizing: border-box; /* Include padding in element's total width and height */
         }
 
+        /* --- Navigation Bar Styles --- */
+        nav {
+            background-color: var(--primary-dark);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            flex-shrink: 0; /* Prevent shrinking on smaller screens */
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding-bottom: 5px; /* For the border effect */
+            position: relative; /* For the underline effect */
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-accent);
+        }
+
+        /* Hamburger menu for mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background-color: var(--white);
+            margin-bottom: 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Styles for when menu is open */
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile navigation menu */
+        nav ul.mobile-nav {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            background-color: var(--primary-dark);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 2px 10px var(--shadow-medium);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav ul.mobile-nav.open {
+            display: flex;
+        }
+
+        nav ul.mobile-nav li {
+            margin: 10px 0;
+        }
+
+        nav ul.mobile-nav li a {
+            font-size: 1.2em;
+            padding: 10px 0;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* Hide desktop menu */
+            }
+            .menu-toggle {
+                display: flex; /* Show hamburger */
+            }
+            nav .logo {
+                font-size: 1.5em;
+            }
+        }
+        /* --- End Navigation Bar Styles --- */
+
+
         header {
             background: var(--primary-dark);
             color: var(--white);
@@ -452,7 +584,34 @@
     </style>
 </head>
 <body>
-    <header>
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo">Strategic Selling</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="desktop-nav" id="main-nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About the Book</a></li>
+                <li><a href="#mastery">What You'll Master</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#review">Leave a Review</a></li>
+            </ul>
+            <ul class="mobile-nav" id="mobile-nav-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About the Book</a></li>
+                <li><a href="#mastery">What You'll Master</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#review">Leave a Review</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home">
         <div class="container">
             <h1>The New Strategic Selling</h1>
             <p>The Unique Sales System Proven Successful by the World's Best Companies</p>
@@ -460,7 +619,7 @@
     </header>
 
     <div class="container main-content fade-in-element">
-        <section class="book-details">
+        <section class="book-details" id="about">
             <div class="book-cover">
                 <h2>Unleash Your Sales Potential with Strategic Selling</h2>
                 <img src="1.png" alt="The New Strategic Selling Book Cover, Revised and Updated for the 21st Century" title="Front cover of 'The New Strategic Selling' by Stephen E. Heiman and Diane Sanchez">
@@ -474,7 +633,7 @@
 
                 <p>Co-authored by Stephen E. Heiman and Diane Sanchez with Tad Tuleja, and featuring a compelling foreword by J.W. Marriott, Jr., this book is an indispensable resource for any sales professional, sales manager, or business leader committed to achieving sustained and unparalleled success in today's competitive market.</p>
 
-                <h3>What You Will Master in "The New Strategic Selling":</h3>
+                <h3 id="mastery">What You Will Master in "The New Strategic Selling":</h3>
                 <ul>
                     <li><i class="fas fa-bullseye"></i> Identify Key Decision Makers: Learn to pinpoint the four crucial decision makers within any corporate structure for effective strategic selling.</li>
                     <li><i class="fas fa-shield-alt"></i> Neutralize Deal-Killers: Discover proven strategies to prevent internal sabotage that can derail your sales deals.</li>
@@ -491,7 +650,7 @@
 
         <hr>
 
-        <section class="testimonials fade-in-element">
+        <section class="testimonials fade-in-element" id="testimonials">
             <h3>What Our Readers Say:</h3>
             <div class="testimonial-item">
                 <p>"This book completely transformed my approach to B2B sales. The 'Win-Win' philosophy isn't just a catchy phrase; it's a practical framework that delivered tangible results for my team. A must-read for anyone serious about complex sales!"</p>
@@ -509,7 +668,7 @@
 
         <hr>
 
-        <section class="image-gallery fade-in-element">
+        <section class="image-gallery fade-in-element" id="gallery">
             <h3>A Closer Look Inside:</h3>
             <div class="gallery-flex">
                 <img src="1.png" alt="Inside pages of The New Strategic Selling book showing diagrams" title="A glimpse inside the pages of this sales classic">
@@ -520,7 +679,7 @@
 
         <hr>
 
-        <section class="review-form-section fade-in-element">
+        <section class="review-form-section fade-in-element" id="review">
             <h3>Share Your Thoughts - Leave a Review!</h3>
             <form class="review-form" id="reviewForm">
                 <label for="name">Your Name:</label>
@@ -539,7 +698,7 @@
                 </div>
 
                 <label for="review">Your Review:</label>
-                <textarea id="review" name="review" rows="6" placeholder="What did you think of 'The New Strategic Selling'?" required></textarea>
+                <textarea id="review-text" name="review" rows="6" placeholder="What did you think of 'The New Strategic Selling'?" required></textarea>
 
                 <input type="submit" value="Submit Review">
                 <div id="formMessage" class="form-message"></div>
@@ -578,6 +737,34 @@
 
             // Run on scroll
             window.addEventListener('scroll', checkFadeElements);
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const mobileNav = document.getElementById('mobile-nav-list');
+                    const menuToggle = document.getElementById('mobile-menu');
+                    if (mobileNav.classList.contains('open')) {
+                        mobileNav.classList.remove('open');
+                        menuToggle.classList.remove('open');
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobile-menu');
+            const mobileNavList = document.getElementById('mobile-nav-list');
+
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileNavList.classList.toggle('open');
+                mobileMenuToggle.classList.toggle('open');
+            });
         });
 
         // Basic form submission simulation (for demonstration purposes)
